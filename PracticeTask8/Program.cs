@@ -33,6 +33,8 @@ namespace PracticeTask8
             {
                 Console.WriteLine("Impossible!");
             }
+
+            Console.ReadLine();
         }
 
         public static string GetCombinations(string[] lines, int startIndex, int endIndex, string combination, int K)
@@ -48,7 +50,7 @@ namespace PracticeTask8
                 {
                     combination += lines[i];
 
-                    combination += GetCombinations(lines, startIndex + 1, endIndex + 1, combination, K);
+                    combination += GetCombinations(lines, i + 1, endIndex + 1, combination, K);
 
                     combination = combination.Substring(0, combination.Length - 2);
                 }
@@ -65,7 +67,7 @@ namespace PracticeTask8
 
             bool ok = true;
 
-            for(int i = 0; i < vertexes.Length - K; i += K)
+            for(int i = 0; i < vertexes.Length; i += K - 1)
             {
                 for(int j = i; j < i + K - 2; j++)
                 {
@@ -82,7 +84,7 @@ namespace PracticeTask8
 
             if (ok)
             {
-                for(int i = 0; i < vertexes.Length - K; i+= K)
+                for(int i = 0; i < vertexes.Length; i += K - 1)
                 {
                     Console.Write(vertexes[i] + " ");
                 }
