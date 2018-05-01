@@ -30,6 +30,20 @@ namespace PracticeTask8
             {
                 // Start of recursion.
                 GetCombinations(lines, 0, lines.Length - K, "", K);
+
+                if (allCliques == "")
+                    Console.WriteLine("There are no cliques!");
+                else
+                {
+                    // Printing all the found cliques.
+                    for(int i = 0; i < allCliques.Length; i++)
+                    {
+                        if (allCliques[i] != ' ')
+                            Console.Write(allCliques[i]);
+                        else
+                            Console.WriteLine();
+                    }
+                }
             }
             else
             {
@@ -38,6 +52,9 @@ namespace PracticeTask8
 
             Console.ReadLine();
         }
+
+        // Stores all the found cliques.
+        public static string allCliques = "";
 
         // Function to go through all the possible combinations of lines.
         // In order to optimise the search it goes like this (example for K=3 and 3 lines):
@@ -106,14 +123,14 @@ namespace PracticeTask8
                     break;
             }
 
-            // If it's a clique then print it.
+            // If it's a clique then store it.
             if (ok)
             {
                 for(int i = 0; i < vertexes.Length; i += K - 1)
                 {
-                    Console.Write(vertexes[i] + " ");
+                    allCliques += vertexes[i];
                 }
-                Console.WriteLine();
+                allCliques += " ";
             }
             
         }
