@@ -27,11 +27,33 @@ namespace PracticeTask8
 
             // The number of lines in a full graph equal k*(k-1)/2.
             int numberOfLines = K * (K - 1) / 2;
+
+            // Jagged array of all possible combinations.
+            string[][] combinations = new string[K][];
+            for(int i = 0; i < combinations.GetLength(0); i++)
+            {
+                combinations[i] = new string[lines.Length - i];
+
+                for(int j = 0; j < combinations.GetLength(1); j++)
+                {
+                    combinations[i][j] = lines[j + 1];
+                }
+            }
         }
 
-        public static string GetCombination(string[] lines, int numberOfLines, int startIndex)
+        public static string GetCombination(string[] lines, int numberOfLines, int startIndex, int K, ref string combination)
         {
-
+            if (numberOfLines != 0)
+            {
+                return "";
+            }
+            else
+            {
+                for (int i = startIndex; i < numberOfLines - K - 1; i++)
+                {
+                    
+                }
+            }
         }
     }
 }
