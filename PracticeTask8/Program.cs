@@ -31,7 +31,7 @@ namespace PracticeTask8
             //string linesInput = Console.ReadLine();
             //string[] lines = linesInput.Split(' ');
 
-            // Getting the size of a clique.
+            // Getting the size of a clique (K > 2).
             int K = Convert.ToInt32(Console.ReadLine());
 
             // It's impossible to look for a clique with the size greater than the number of vertexes.
@@ -40,8 +40,14 @@ namespace PracticeTask8
                 // The number of lines in a clique.
                 int numOfLines = K * (K - 1) / 2;
 
+                int endIndex;
+                if (K == 2)
+                    endIndex = lines.Length - 1;
+                else
+                    endIndex = lines.Length - K;
+
                 // Start of recursion.
-                GetCombinations(lines, 0, lines.Length - K, "", K, numOfLines);
+                GetCombinations(lines, 0, endIndex, "", K, numOfLines);
 
                 if (allCliques == "")
                     Console.WriteLine("There are no cliques!");
@@ -193,7 +199,8 @@ namespace PracticeTask8
                 linesStr += currLines;
             }
 
-            linesStr = linesStr.Remove(linesStr.Length - 1, 1);
+            if (linesStr != "")
+                linesStr = linesStr.Remove(linesStr.Length - 1, 1);
 
             string[] lines = linesStr.Split(' ');
 
