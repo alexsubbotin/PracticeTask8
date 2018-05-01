@@ -14,12 +14,11 @@ namespace PracticeTask8
         static void Main(string[] args)
         {
             // Getting the list of vertexes.
-            string vertexes = Console.ReadLine();
+            string vertexesInput = Console.ReadLine();
+            string[] vertexes = vertexesInput.Split(' ');
 
             // Getting the list of lines.
             string linesInput = Console.ReadLine();
-
-            // Creating the array of lines.
             string[] lines = linesInput.Split(' ');
 
             // Getting the size of a clique.
