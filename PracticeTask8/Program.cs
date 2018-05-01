@@ -24,8 +24,14 @@ namespace PracticeTask8
 
             // Getting the size of a clique.
             int K = Convert.ToInt32(Console.ReadLine());
+
+            // The number of lines in a full graph equal k*(k-1)/2.
+            int numberOfLines = K * (K - 1) / 2;
         }
 
-        public static string GetCombination()
+        public static string GetCombination(string[] lines, int numberOfLines, int startIndex)
+        {
+
+        }
     }
 }
