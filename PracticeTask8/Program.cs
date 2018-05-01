@@ -25,35 +25,70 @@ namespace PracticeTask8
             // Getting the size of a clique.
             int K = Convert.ToInt32(Console.ReadLine());
 
-            // The number of lines in a full graph equal k*(k-1)/2.
-            int numberOfLines = K * (K - 1) / 2;
-
-            // Jagged array of all possible combinations.
-            string[][] combinations = new string[K][];
-            for(int i = 0; i < combinations.GetLength(0); i++)
+            if (K <= vertexes.Length)
             {
-                combinations[i] = new string[lines.Length - i];
-
-                for(int j = 0; j < combinations.GetLength(1); j++)
-                {
-                    combinations[i][j] = lines[j + 1];
-                }
+                GetCombinations(lines, 0, lines.Length - K, "", K);
+            }
+            else
+            {
+                Console.WriteLine("Impossible!");
             }
         }
 
-        public static string GetCombination(string[] lines, int numberOfLines, int startIndex, int K, ref string combination)
+        public static string GetCombinations(string[] lines, int startIndex, int endIndex, string combination, int K)
         {
-            if (numberOfLines != 0)
+            if(endIndex >= lines.Length)
             {
+                Analysis(combination, K);
                 return "";
             }
             else
             {
-                for (int i = startIndex; i < numberOfLines - K - 1; i++)
+                for(int i = startIndex; i <= endIndex; i++)
                 {
-                    
+                    combination += lines[i];
+
+                    combination += GetCombinations(lines, startIndex + 1, endIndex + 1, combination, K);
+
+                    combination = combination.Substring(0, combination.Length - 2);
                 }
+
+                return "";
             }
+        }
+
+        public static void Analysis(string combination, int K)
+        {
+            char[] vertexes = combination.ToCharArray();
+
+            Array.Sort(vertexes);
+
+            bool ok = true;
+
+            for(int i = 0; i < vertexes.Length - K; i += K)
+            {
+                for(int j = i; j < i + K - 2; j++)
+                {
+                    if(vertexes[j] != vertexes[j + 1])
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if (!ok)
+                    break;
+            }
+
+            if (ok)
+            {
+                for(int i = 0; i < vertexes.Length - K; i+= K)
+                {
+                    Console.Write(vertexes[i] + " ");
+                }
+                Console.WriteLine();
+            }
+            
         }
     }
 }
