@@ -14,12 +14,16 @@ namespace PracticeTask8
         static void Main(string[] args)
         {
             // Getting the list of vertexes.
-            string vertexesInput = Console.ReadLine();
-            string[] vertexes = vertexesInput.Split(' ');
+            string[] vertexes = VertexGenerator();
+
+            //string vertexesInput = Console.ReadLine();
+            //string[] vertexes = vertexesInput.Split(' ');
 
             // Getting the list of lines.
-            string linesInput = Console.ReadLine();
-            string[] lines = linesInput.Split(' ');
+            string[] lines = LinesGenerator(vertexes);
+
+            //string linesInput = Console.ReadLine();
+            //string[] lines = linesInput.Split(' ');
 
             // Getting the size of a clique.
             int K = Convert.ToInt32(Console.ReadLine());
@@ -140,7 +144,54 @@ namespace PracticeTask8
                 }
                 allCliques += " ";
             }
+        }
 
+        public static Random rnd = new Random();
+
+        // Creating the list of vertexes.
+        public static string[] VertexGenerator()
+        {
+            string[] vertexes = new string[rnd.Next(2, 11)];
+            for (int i = 0; i < vertexes.Length; i++)
+                vertexes[i] = ((char)(i + 65)).ToString();
+
+            return vertexes;
+        }
+
+        // Creating the list of lines.
+        public static string[] LinesGenerator(string[] vertexes)
+        {
+            string linesStr = "";
+
+            for (int i = 0; i < vertexes.Length; i++)
+            {
+                // Number of lines with a current vertex.
+                int numOfCurrLines = rnd.Next(0, vertexes.Length);
+
+                // The lisy of lines with a current vertex.
+                string currLines = "";
+
+                for (int j = 0; j < numOfCurrLines; j++)
+                {
+                    // A random index of a second vertex in a line.
+                    int randomIndex;
+
+                    do
+                    {
+                        randomIndex = rnd.Next(i, vertexes.Length - 1);
+                    } while (currLines.Contains(vertexes[randomIndex]));
+
+                    currLines += vertexes[i] + vertexes[randomIndex] + " ";
+                }
+
+                linesStr += currLines;
+            }
+
+            linesStr = linesStr.Remove(linesStr.Length - 1, 1);
+
+            string[] lines = linesStr.Split(' ');
+
+            return lines;
         }
     }
 }
