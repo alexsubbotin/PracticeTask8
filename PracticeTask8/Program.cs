@@ -15,12 +15,18 @@ namespace PracticeTask8
         {
             // Getting the list of vertexes.
             string[] vertexes = VertexGenerator();
+            foreach (string v in vertexes)
+                Console.Write(v + " ");
+            Console.WriteLine();
 
             //string vertexesInput = Console.ReadLine();
             //string[] vertexes = vertexesInput.Split(' ');
 
             // Getting the list of lines.
             string[] lines = LinesGenerator(vertexes);
+            foreach (string l in lines)
+                Console.Write(l + " ");
+            Console.WriteLine();
 
             //string linesInput = Console.ReadLine();
             //string[] lines = linesInput.Split(' ');
@@ -166,7 +172,7 @@ namespace PracticeTask8
             for (int i = 0; i < vertexes.Length; i++)
             {
                 // Number of lines with a current vertex.
-                int numOfCurrLines = rnd.Next(0, vertexes.Length);
+                int numOfCurrLines = rnd.Next(0, vertexes.Length - i - 1);
 
                 // The lisy of lines with a current vertex.
                 string currLines = "";
@@ -179,7 +185,7 @@ namespace PracticeTask8
                     do
                     {
                         randomIndex = rnd.Next(i, vertexes.Length - 1);
-                    } while (currLines.Contains(vertexes[randomIndex]));
+                    } while (currLines.Contains(vertexes[randomIndex]) || vertexes[randomIndex] == vertexes[i]);
 
                     currLines += vertexes[i] + vertexes[randomIndex] + " ";
                 }
