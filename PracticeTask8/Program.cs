@@ -32,7 +32,7 @@ namespace PracticeTask8
             //string[] lines = linesInput.Split(' ');
 
             // Getting the size of a clique (K > 2).
-            int K = Convert.ToInt32(Console.ReadLine());
+            int K = GetK();
 
             // It's impossible to look for a clique with the size greater than the number of vertexes.
             if (K <= vertexes.Length)
@@ -70,6 +70,22 @@ namespace PracticeTask8
             }
 
             Console.ReadLine();
+        }
+
+        // Method to get K.
+        public static int GetK()
+        {
+            int K;
+            bool ok;
+            do
+            {
+                Console.Write("Enter the K: ");
+                ok = Int32.TryParse(Console.ReadLine(), out K);
+                if (!ok || K < 2)
+                    Console.WriteLine("Input error! K shoud be a natural number greater than 1");
+            } while (!ok || K < 2);
+
+            return K;
         }
 
         // Stores all the found cliques.
